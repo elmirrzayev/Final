@@ -33,7 +33,7 @@ $(document).ready(function () {
                 if (pass == localStorage.getItem(`user${i}-password`)) {
                     localStorage.setItem(`new`,localStorage.getItem(`user${i}-name`))
                     g = true;
-                    window.location.assign("succes.html");
+                    window.location.assign("index.html");
                 }
             }
 

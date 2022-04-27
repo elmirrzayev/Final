@@ -1510,3 +1510,13 @@ var lenovo = [
         GPU: "Intel Iris Xe Graphics"
     },
 ]
+var nav = document.querySelector("#nav-tabContent");
+for(var i = 0;i<acer.length;i++){
+// var div = document.createElement("div");
+// div.classList.add("tab-pane fade show active");
+var img = document.createElement("img");
+img.setAttribute("src","images/Acer.jpg");
+nav.appendChild(img)
+// div.appendChild(img);
+
+}

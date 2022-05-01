@@ -64,7 +64,7 @@ $(document).ready(function () {
             passwordcheck = true;
         }
     });
-    $("#Signup").click(function(e){
+    $("#create").submit(function(e){
         e.preventDefault();
     if(passwordcheck&&usernamecheck&&namecheck){
         k=Number(localStorage.getItem(`number`))+1;

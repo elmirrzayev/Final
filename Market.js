@@ -1512,11 +1512,32 @@ var lenovo = [
 ]
 var nav = document.querySelector("#nav-tabContent");
 for(var i = 0;i<acer.length;i++){
-// var div = document.createElement("div");
-// div.classList.add("tab-pane fade show active");
+var div = document.createElement("div");
+div.classList.add("width-20");
+div.classList.add("p-3");
+var box = document.createElement("div");
+box.classList.add("box");
+var ad = document.createElement("p");
+ad.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Ad</span>:${acer[i].ad}</p>`;
+var yeni = document.createElement("p");
+yeni.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Yenidir</span>:${acer[i].yeni}</p>`;
+var telefon = document.createElement("p");
+telefon.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Telefon</span><span id="small">:${acer[i].telefon}</span></p>`;
+var qiymet = document.createElement("p");
+qiymet.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Qiymet</span>:${acer[i].qiymet}</p>`
+var buton = document.createElement("button");
+buton.classList.add("btn");
+buton.classList.add("btn-primary");
+buton.classList.add("ms-4");
+buton.innerText = "Ətraflı";
 var img = document.createElement("img");
 img.setAttribute("src","images/Acer.jpg");
-nav.appendChild(img)
-// div.appendChild(img);
-
+box.appendChild(img);
+box.appendChild(ad);
+box.appendChild(telefon);
+box.appendChild(yeni);
+box.appendChild(qiymet);
+box.appendChild(buton);
+div.appendChild(box);
+nav.appendChild(div)
 }

@@ -72,7 +72,6 @@ $(document).ready(function () {
         localStorage.setItem(`user${k}-phone`,$("#phone").val());
         localStorage.setItem(`user${k}-name`,$("#username").val());
         localStorage.setItem(`user${k}-password`,$("#password1").val());
-        // localStorage.setItem(`new`,$("#name").val());
         localStorage.setItem(`number`,k);
     }else{
         alert("Bəzi Yanlışlar var")

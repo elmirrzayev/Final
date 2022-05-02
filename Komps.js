@@ -1,8 +1,10 @@
+var k = 0;
 $('#button1').click(function () {
     $('#exampleModalLong').addClass("show");
     $('#exampleModalLong').addClass("modalStyle");
     $('#exampleModalLong').removeClass("d-none");
 });
+var check = true;
     $("#exit").click(function () {
         $('#exampleModalLong').removeClass("show");
         $('#exampleModalLong').removeClass("modalStyle");
@@ -44,5 +46,29 @@ $('#button1').click(function () {
         } else {
             para.removeClass("is-invalid");
             para.addClass("is-valid");
+            check=false;
         }
+    }
+    var base64;
+    function imageToBase(elementt){
+     var file = elementt.files[0];
+     var reader = new FileReader();
+     reader.onloadend = function(){
+       base64 = reader.result;
+     };
+     reader.readAsDataURL(file);
+    }
+if(check){
+    k=Number(localStorage.getItem(`all`))+1;
+    localStorage.setItem(`user${k}-category`,$("#a").val());
+    localStorage.setItem(`user${k}-nick`,$("#b").val());
+    localStorage.setItem(`user${k}-tesvir`,$("#c").val());
+    localStorage.setItem(`user${k}-yeni`,$("#d").val());
+    localStorage.setItem(`user${k}-base`,);
+    localStorage.setItem(`user${k}-mprosessor`,$("#g").val());
+    localStorage.setItem(`user${k}-dyaddas`,$("i").val());
+    localStorage.setItem(`user${k}-dyaddast`,$("#j").val());
+    localStorage.setItem(`user${k}-əməliyyats`,$("#k").val());
+    localStorage.setItem(`user${k}-GPU`,$("#q").val());
+    localStorage.setItem(`all`,k);
     }

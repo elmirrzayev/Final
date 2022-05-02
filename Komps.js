@@ -1,3 +1,4 @@
+var r =document.querySelector("#ul");
 var k = 0;
 $('#button1').click(function () {
     $('#exampleModalLong').addClass("show");
@@ -44,6 +45,11 @@ var check = true;
             localStorage.setItem(`user${k}-əməliyyats`,$("#k").val());
             localStorage.setItem(`user${k}-GPU`,$("#q").val());
             localStorage.setItem(`all`,k);
+            }
+            $('#avbl').addClass("d-none");
+            var z = document.createElement("td");
+            for(var i = 0 ; i < 4;i++){
+                var q = document.createElement("th");
             }
     });
     $("#remove").click(function(){

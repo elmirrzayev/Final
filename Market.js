@@ -1,13 +1,13 @@
-function Scroll(el){
-    $(window).scroll(function(){
+function Scroll(el) {
+    $(window).scroll(function () {
         let sumOfHeight = Math.ceil(window.scrollY + window.innerHeight);
         let bodyHeight = document.querySelector("body").scrollHeight;
-        console.log(sumOfHeight,bodyHeight);
+        console.log(sumOfHeight, bodyHeight);
         let g = 0;
-        if(sumOfHeight == bodyHeight){
+        if (sumOfHeight == bodyHeight) {
             console.log("scrolling");
-            if(g<el.length-10){
-                for (var i = 10; i <el.length-10; i++) {
+            if (g < el.length - 10) {
+                for (var i = 10; i < el.length - 10; i++) {
                     var div = document.createElement("div");
                     div.classList.add("width-20");
                     div.classList.add("p-3");
@@ -40,11 +40,11 @@ function Scroll(el){
                 }
             }
             g++;
-    
+
         }
-        
+
     })
-    }
+}
 var arrBrand = ["Acer", "Asus", "Dell", "HP", "Lenovo"]
 var acer = [{
     ad: "acer",
@@ -1559,8 +1559,8 @@ var lenovo = [
     },
 ]
 var nav = document.querySelector("#nav-tabContent");
-var item = document.querySelectorAll(".list-group-item");
 var cont = document.querySelector("#list-tab");
+var item = document.querySelectorAll(".list-group-item");
 for (var i = 0; i < 10; i++) {
     var div = document.createElement("div");
     div.classList.add("width-20");
@@ -1579,6 +1579,7 @@ for (var i = 0; i < 10; i++) {
     buton.classList.add("btn");
     buton.classList.add("btn-primary");
     buton.classList.add("ms-4");
+    buton.classList.add("buton");
     buton.innerText = "Ətraflı";
     buton.setAttribute("tabindex", i)
     var img = document.createElement("img");
@@ -1592,7 +1593,46 @@ for (var i = 0; i < 10; i++) {
     div.appendChild(box);
     nav.appendChild(div)
 }
+var input = document.querySelector("#search");
+input.addEventListener("keyup", function (e) {
+    // console.log(e.keyCode);
+    if (e.keyCode > 64 && e.keyCode < 91 || e.keyCode == 8) {
+        $('#list-tab').empty();
+        for (var i = 0; i < arrBrand.length; i++) {
+            var g = input.value;
+            // var h = arrBrand[i];
+            if (arrBrand[i].toLowerCase().includes(g.toLowerCase())) {
+                console.log("sda");
+                var f = document.createElement("li");
+                f.classList.add("list-group-item");
+                f.classList.add("list-group-item-action");
+                // f.setAttribute("id","")
+                f.innerText = arrBrand[i];
+                cont.appendChild(f);
+            }
+        }
+        if (cont.children.length == 0) {
+            var j = document.createElement("li");
+            j.classList.add("list-group-item");
+            j.classList.add("list-group-item-action");
+            j.innerText = "Netice tapilmadi!";
+            cont.appendChild(j);
+        }
 
+    } else if (input.value == "") {
+        $('#list-tab').empty();
+
+        for (var i = 0; i < arrBrand.length; i++) {
+            var a = document.createElement("li");
+            a.classList.add("list-group-item");
+            a.classList.add("list-group-item-action");
+            a.innerText = arrBrand[i];
+            cont.appendChild(a);
+        }
+    }
+    var item = document.querySelectorAll(".list-group-item");
+    
+});
 for (var i = 0; i < 5; i++) {
     item[i].addEventListener("click", function () {
         console.log("salam");
@@ -1611,40 +1651,51 @@ for (var i = 0; i < 5; i++) {
         } else if (content == "lenovo") {
             arr = lenovo;
         }
-        for(var i = 0;i<10;i++){
+        for (var i = 0; i < 10; i++) {
             console.log(arr);
             var div = document.createElement("div");
-    div.classList.add("width-20");
-    div.classList.add("p-3");
-    var box = document.createElement("div");
-    box.classList.add("box");
-    var ad = document.createElement("p");
-    ad.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Ad</span>:${arr[i].ad}</p>`;
-    var yeni = document.createElement("p");
-    yeni.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Yenidir</span>:${arr[i].yeni}</p>`;
-    var telefon = document.createElement("p");
-    telefon.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Telefon</span><span id="small">:${arr[i].telefon}</span></p>`;
-    var qiymet = document.createElement("p");
-    qiymet.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Qiymet</span>:${arr[i].qiymet}</p>`
-    var buton = document.createElement("button");
-    buton.classList.add("btn");
-    buton.classList.add("btn-primary");
-    buton.classList.add("ms-4");
-    buton.innerText = "Ətraflı";
-    buton.setAttribute("tabindex", i)
-    var img = document.createElement("img");
-    img.setAttribute("src", `images/${content}.jpg`);
-    box.appendChild(img);
-    box.appendChild(ad);
-    box.appendChild(telefon);
-    box.appendChild(yeni);
-    box.appendChild(qiymet);
-    box.appendChild(buton);
-    div.appendChild(box);
-    nav.appendChild(div)
+            div.classList.add("width-20");
+            div.classList.add("p-3");
+            var box = document.createElement("div");
+            box.classList.add("box");
+            var ad = document.createElement("p");
+            ad.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Ad</span>:${arr[i].ad}</p>`;
+            var yeni = document.createElement("p");
+            yeni.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Yenidir</span>:${arr[i].yeni}</p>`;
+            var telefon = document.createElement("p");
+            telefon.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Telefon</span><span id="small">:${arr[i].telefon}</span></p>`;
+            var qiymet = document.createElement("p");
+            qiymet.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Qiymet</span>:${arr[i].qiymet}</p>`
+            var buton = document.createElement("button");
+            buton.classList.add("btn");
+            buton.classList.add("btn-primary");
+            buton.classList.add("ms-4");
+            buton.innerText = "Ətraflı";
+            buton.setAttribute("tabindex", i)
+            var img = document.createElement("img");
+            img.setAttribute("src", `images/${content}.jpg`);
+            box.appendChild(img);
+            box.appendChild(ad);
+            box.appendChild(telefon);
+            box.appendChild(yeni);
+            box.appendChild(qiymet);
+            box.appendChild(buton);
+            div.appendChild(box);
+            nav.appendChild(div)
         }
-   Scroll(arr); 
-})
+        Scroll(arr);
+    })
 
 }
+
+$('.buton').click(function () {
+    $('#exampleModalLong').addClass("show");
+    $('#exampleModalLong').addClass("modalStyle");
+    $('#exampleModalLong').removeClass("d-none");
+});
+$("#exit").click(function () {
+    $('#exampleModalLong').removeClass("show");
+    $('#exampleModalLong').removeClass("modalStyle");
+    $('#exampleModalLong').addClass("d-none");
+});
 

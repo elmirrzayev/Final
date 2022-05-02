@@ -10,6 +10,16 @@ var check = true;
         $('#exampleModalLong').removeClass("modalStyle");
         $('#exampleModalLong').addClass("d-none");
     });
+    var base64;
+    function imageToBase(elementt){
+     var file = elementt.files[0];
+     var reader = new FileReader();
+     reader.onloadend = function(){
+       base64 = reader.result;
+     };
+     reader.readAsDataURL(file);
+    }
+// console.log(base64);
     $("#add").click(function () {
         isInvalid($("#a"));
         isInvalid($("#b"));
@@ -21,6 +31,20 @@ var check = true;
         isInvalid($("#j"));
         isInvalid($("#k"));
         isInvalid($("#q"));
+        if(check){
+            k=Number(localStorage.getItem(`all`))+1;
+            localStorage.setItem(`user${k}-category`,$("#a").val());
+            localStorage.setItem(`user${k}-nick`,$("#b").val());
+            localStorage.setItem(`user${k}-tesvir`,$("#c").val());
+            localStorage.setItem(`user${k}-yeni`,$("#d").val());
+            // localStorage.setItem(`user${k}-base`,);
+            localStorage.setItem(`user${k}-mprosessor`,$("#g").val());
+            localStorage.setItem(`user${k}-dyaddas`,$("i").val());
+            localStorage.setItem(`user${k}-dyaddast`,$("#j").val());
+            localStorage.setItem(`user${k}-əməliyyats`,$("#k").val());
+            localStorage.setItem(`user${k}-GPU`,$("#q").val());
+            localStorage.setItem(`all`,k);
+            }
     });
     $("#remove").click(function(){
         Sifirla($("#a"));
@@ -33,6 +57,7 @@ var check = true;
         Sifirla($("#j"));
         Sifirla($("#k"));
         Sifirla($("#q"));
+        
     });
     
     // function
@@ -42,33 +67,12 @@ var check = true;
     function isInvalid(para) {
         if (para.val() == "") {
             para.removeClass("is-valid");
-            para.addClass("is-invalid");
+            para.addClass("is-invalid"); 
+            check=false;
         } else {
             para.removeClass("is-invalid");
             para.addClass("is-valid");
-            check=false;
+           
         }
     }
-    var base64;
-    function imageToBase(elementt){
-     var file = elementt.files[0];
-     var reader = new FileReader();
-     reader.onloadend = function(){
-       base64 = reader.result;
-     };
-     reader.readAsDataURL(file);
-    }
-if(check){
-    k=Number(localStorage.getItem(`all`))+1;
-    localStorage.setItem(`user${k}-category`,$("#a").val());
-    localStorage.setItem(`user${k}-nick`,$("#b").val());
-    localStorage.setItem(`user${k}-tesvir`,$("#c").val());
-    localStorage.setItem(`user${k}-yeni`,$("#d").val());
-    localStorage.setItem(`user${k}-base`,);
-    localStorage.setItem(`user${k}-mprosessor`,$("#g").val());
-    localStorage.setItem(`user${k}-dyaddas`,$("i").val());
-    localStorage.setItem(`user${k}-dyaddast`,$("#j").val());
-    localStorage.setItem(`user${k}-əməliyyats`,$("#k").val());
-    localStorage.setItem(`user${k}-GPU`,$("#q").val());
-    localStorage.setItem(`all`,k);
-    }
+

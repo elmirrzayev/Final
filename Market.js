@@ -1,8 +1,55 @@
+function Scroll(el){
+    $(window).scroll(function(){
+        let sumOfHeight = Math.ceil(window.scrollY + window.innerHeight);
+        let bodyHeight = document.querySelector("body").scrollHeight;
+        console.log(sumOfHeight,bodyHeight);
+        let g = 0;
+        if(sumOfHeight == bodyHeight){
+            console.log("scrolling");
+            if(g<el.length-10){
+                for (var i = 10; i <el.length-10; i++) {
+                    var div = document.createElement("div");
+                    div.classList.add("width-20");
+                    div.classList.add("p-3");
+                    var box = document.createElement("div");
+                    box.classList.add("box");
+                    var ad = document.createElement("p");
+                    ad.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Ad</span>:${el[i].ad}</p>`;
+                    var yeni = document.createElement("p");
+                    yeni.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Yenidir</span>:${el[i].yeni}</p>`;
+                    var telefon = document.createElement("p");
+                    telefon.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Telefon</span><span id="small">:${el[i].telefon}</span></p>`;
+                    var qiymet = document.createElement("p");
+                    qiymet.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Qiymet</span>:${el[i].qiymet}</p>`
+                    var buton = document.createElement("button");
+                    buton.classList.add("btn");
+                    buton.classList.add("btn-primary");
+                    buton.classList.add("ms-4");
+                    buton.innerText = "Ətraflı";
+                    buton.setAttribute("tabindex", i)
+                    var img = document.createElement("img");
+                    img.setAttribute("src", `images/${content}.jpg`);
+                    box.appendChild(img);
+                    box.appendChild(ad);
+                    box.appendChild(telefon);
+                    box.appendChild(yeni);
+                    box.appendChild(qiymet);
+                    box.appendChild(buton);
+                    div.appendChild(box);
+                    nav.appendChild(div)
+                }
+            }
+            g++;
+    
+        }
+        
+    })
+    }
 var arrBrand = ["Acer", "Asus", "Dell", "HP", "Lenovo"]
 var acer = [{
     ad: "acer",
     tesvir: "tesvir",
-    qiymet: "2780 AZN",
+    qiymet: "2480 AZN",
     telefon: "055-867-3567",
     yeni: "bəli",
     əməliyaddaş: "16GB",
@@ -14,7 +61,7 @@ var acer = [{
 }, {
     ad: "acer",
     tesvir: "tesvir",
-    qiymet: "2780 AZN",
+    qiymet: "1180 AZN",
     telefon: "055-867-3567",
     yeni: "bəli",
     əməliyaddaş: "16GB",
@@ -1212,7 +1259,7 @@ var lenovo = [
     {
         ad: "lenovo",
         tesvir: "tesvir",
-        qiymet: "2780 AZN",
+        qiymet: "1380 AZN",
         telefon: "055-867-3567",
         yeni: "bəli",
         əməliyaddaş: "16GB",
@@ -1513,8 +1560,8 @@ var lenovo = [
 ]
 var nav = document.querySelector("#nav-tabContent");
 var item = document.querySelectorAll(".list-group-item");
-var cont = document.querySelector(".list-group");
-for (var i = 0; i < acer.length; i++) {
+var cont = document.querySelector("#list-tab");
+for (var i = 0; i < 10; i++) {
     var div = document.createElement("div");
     div.classList.add("width-20");
     div.classList.add("p-3");
@@ -1545,10 +1592,11 @@ for (var i = 0; i < acer.length; i++) {
     div.appendChild(box);
     nav.appendChild(div)
 }
+
 for (var i = 0; i < 5; i++) {
     item[i].addEventListener("click", function () {
         console.log("salam");
-        cont.empty();
+        $(`#nav-tabContent`).empty();
         let arr;
         var content = String(this.innerText);
         content = content.toLowerCase();
@@ -1563,7 +1611,7 @@ for (var i = 0; i < 5; i++) {
         } else if (content == "lenovo") {
             arr = lenovo;
         }
-        for(var i = 0;i<arr.length;i++){
+        for(var i = 0;i<10;i++){
             console.log(arr);
             var div = document.createElement("div");
     div.classList.add("width-20");
@@ -1595,5 +1643,8 @@ for (var i = 0; i < 5; i++) {
     div.appendChild(box);
     nav.appendChild(div)
         }
-    })
+   Scroll(arr); 
+})
+
 }
+

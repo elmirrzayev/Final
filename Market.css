@@ -18,3 +18,9 @@ img{
 .box:hover{
     box-shadow: 2px 1px 10px 2px;
 }
+p{
+    color: black;
+}
+/* #bildim{
+    background-color: antiquewhite;
+} */

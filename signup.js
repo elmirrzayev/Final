@@ -47,7 +47,7 @@ $(document).ready(function () {
         } else {
             $("#password1").removeClass("is-invalid");
             $("#password1").addClass("is-valid");
-            
+
         }
     })
 
@@ -64,17 +64,33 @@ $(document).ready(function () {
             passwordcheck = true;
         }
     });
-    $("#create").submit(function(e){
+    $("#create").submit(function (e) {
         e.preventDefault();
-    if(passwordcheck&&usernamecheck&&namecheck){
-        k=Number(localStorage.getItem(`number`))+1;
-        localStorage.setItem(`user${k}-fname`,$("#name").val());
-        localStorage.setItem(`user${k}-phone`,$("#phone").val());
-        localStorage.setItem(`user${k}-name`,$("#username").val());
-        localStorage.setItem(`user${k}-password`,$("#password1").val());
-        localStorage.setItem(`number`,k);
-    }else{
-        alert("Bəzi Yanlışlar var")
-    } 
-})
+        var g = true;
+        var name = $("#name").val();
+        var pass = $("#password1").val();
+        var phone = $("#phone").val();
+        var user = $("#username").val();
+        var local = Number(localStorage.getItem(`number`));
+        if (passwordcheck && usernamecheck && namecheck) {
+            for (var i = 0; i <= local; i++) {
+                if (name == localStorage.getItem(`user${i}-fname`) && pass == localStorage.getItem(`user${i}-password`)
+                    && phone == localStorage.getItem(`user${i}-phone`) && user == localStorage.getItem(`user${i}-name`)) {
+                        alert("BELE ISTIFADECI ARTIQ VAR");
+                    g = false;
+                }
+            }
+                if(g){
+                k = Number(localStorage.getItem(`number`)) + 1;
+                localStorage.setItem(`user${k}-fname`, $("#name").val());
+                localStorage.setItem(`user${k}-phone`, $("#phone").val());
+                localStorage.setItem(`user${k}-name`, $("#username").val());
+                localStorage.setItem(`user${k}-password`, $("#password1").val());
+                localStorage.setItem(`number`, k);
+                }
+            
+        } else {
+            alert("Bəzi Yanlışlar var")
+        }
+    })
 })

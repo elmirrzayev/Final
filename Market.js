@@ -30,7 +30,7 @@ function Scroll(el, content) {
                     buton.innerText = "Ətraflı";
                     buton.setAttribute("tabindex", i)
                     var img = document.createElement("img");
-                    img.setAttribute("src", `images/${content}.jpg`);
+                    img.setAttribute("src", `images/${content}`);
                     box.appendChild(img);
                     box.appendChild(ad);
                     box.appendChild(telefon);
@@ -48,8 +48,10 @@ function Scroll(el, content) {
 
     });
 }
+
 var arrBrand = ["Acer", "Asus", "Dell", "HP", "Lenovo"]
-var acer = [{
+var acer = [
+    {
     ad: "acer", tesvir: "tesvir", qiymet: "2480 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
 }, {
     ad: "acer", tesvir: "tesvir", qiymet: "1180 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
@@ -101,7 +103,8 @@ var acer = [{
     ad: "acer", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
 }
 ];
-var asus = [{
+var asus = [
+    {
     ad: "asus", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
 }, {
     ad: "asus", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
@@ -151,10 +154,11 @@ var asus = [{
     ad: "Asus", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
 }, {
     ad: "Asus", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
-}];
+}
+];
 var dell = [
     {
-        ad: "dell", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
+        ad: "dell", tesvir: "tesvir", qiymet: "2790 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
     }, {
         ad: "dell", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
     }, {
@@ -311,10 +315,53 @@ var lenovo = [
         ad: "lenovo", tesvir: "tesvir", qiymet: "2780 AZN", telefon: "055-867-3567", yeni: "bəli", əməliyaddaş: "16GB", CPU: "Core i9", daimiyaddaş: "500GB", daimitipi: "SSD", emeliyyat: "win 10", GPU: "Intel Iris Xe Graphics"
     },
 ]
-
+let brand = "acer";
+let arrJSON;
+if(localStorage.getItem(`prop`)){
+    arrJSON = JSON.parse(localStorage.getItem(`prop`));
+}else{
+    arrJSON = [];
+}
+let arr = acer;
 var nav = document.querySelector("#nav-tabContent");
 var cont = document.querySelector("#list-tab");
 var item = document.querySelectorAll(".list-group-item");
+function userPc(cat){
+    for(let i = 0;i<arrJSON.length;i++){
+        if(cat.toLowerCase() == arrJSON[i].category.toLowerCase()){
+            var div = document.createElement("div");
+            div.classList.add("width-20");
+            div.classList.add("p-3");
+            var box = document.createElement("div");
+            box.classList.add("box");
+            var ad = document.createElement("p");
+            ad.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Ad</span>:${arrJSON[i].nick}</p>`;
+            var yeni = document.createElement("p");
+            yeni.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Yenidir</span>:${arrJSON[i].yeni}</p>`;
+            var telefon = document.createElement("p");
+            telefon.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >GPU</span><span id="small">:${arrJSON[i].gpu}</span></p>`;
+            var qiymet = document.createElement("p");
+            qiymet.innerHTML = `<p><span class = "badge rounded-pill bg-primary" >Qiymet</span>:${arrJSON[i].qiymet}</p>`
+            var buton = document.createElement("button");
+            buton.classList.add("btn");
+            buton.classList.add("btn-primary");
+            buton.classList.add("ms-4");
+            buton.classList.add("button");
+            buton.innerText = "Ətraflı";
+            buton.setAttribute("tabindex", i)
+            var img = document.createElement("img");
+            img.setAttribute("src", arrJSON[i].base);
+            box.appendChild(img);
+            box.appendChild(ad);
+            box.appendChild(telefon);
+            box.appendChild(yeni);
+            box.appendChild(qiymet);
+            box.appendChild(buton);
+            div.appendChild(box);
+            nav.appendChild(div);
+        }
+    }
+}
 for (var i = 0; i < 10; i++) {
     var div = document.createElement("div");
     div.classList.add("width-20");
@@ -345,8 +392,12 @@ for (var i = 0; i < 10; i++) {
     box.appendChild(qiymet);
     box.appendChild(buton);
     div.appendChild(box);
-    nav.appendChild(div)
+    nav.appendChild(div);
+    // Scroll(acer,"acer.jpg");
+
 }
+// console.log("isleyir");
+
 var input = document.querySelector("#search");
 input.addEventListener("keyup", function (e) {
     // console.log(e.keyCode);
@@ -387,38 +438,38 @@ input.addEventListener("keyup", function (e) {
     }
 
 });
+var content = "acer";
 var img1;
 var item = document.querySelectorAll(".list-group-item");
 for (var i = 0; i < 5; i++) {
     item[i].addEventListener("click", function () {
         // console.log("salam");
         $(`#nav-tabContent`).empty();
-        let arr;
-        var content = String(this.innerText);
+        content = String(this.innerText);
         content = content.toLowerCase();
         if (content == "acer") {
             arr = acer;
-            img1 = "Acer.png";
+            img1 = "acer.jpg";
 
         } else if (content == "asus") {
             arr = asus;
-            img1 = "Asus.png";
+            img1 = "asus.jpg";
 
         } else if (content == "dell") {
             arr = dell;
-            img1 = "Dell.png";
+            img1 = "dell.jpg";
 
         } else if (content == "hp") {
             arr = hp;
-            img1 = "HP.png";
+            img1 = "hp.jpg";
 
         } else if (content == "lenovo") {
             arr = lenovo;
-            img1 = "Lenovo.png";
+            img1 = "lenovo.jpg";
 
         }
         for (var i = 0; i < 10; i++) {
-            // console.log(arr);
+            console.log(img1);
             var div = document.createElement("div");
             div.classList.add("width-20");
             div.classList.add("p-3");
@@ -440,7 +491,7 @@ for (var i = 0; i < 5; i++) {
             buton.setAttribute("tabindex", i)
             buton.classList.add("button");
             var img = document.createElement("img");
-            img.setAttribute("src", `images/${content}.jpg`);
+            img.setAttribute("src", `images/${img1}`);
             box.appendChild(img);
             box.appendChild(ad);
             box.appendChild(telefon);
@@ -450,34 +501,34 @@ for (var i = 0; i < 5; i++) {
             div.appendChild(box);
             nav.appendChild(div)
         }
-        Scroll(arr);
-    })
+        Scroll(arr, img1);
+        console.log(img1);
+    });
 }
-var content;
+
 for (var i = 0; i < 5; i++) {
     item[i].addEventListener("click", function () {
-        // console.log("salam");
         $(`#nav-tabContent`).empty();
-        let arr;
+        userPc(this.innerText);
         content = String(this.innerText);
         content = content.toLowerCase();
         if (content == "acer") {
             arr = acer;
-            img1 = "Acer.png";
+            img1 = "acer.jpg";
         } else if (content == "asus") {
             arr = asus;
-            img1 = "Asus.png";
+            img1 = "asus.jpg";
         } else if (content == "dell") {
             arr = dell;
-            img1 = "Dell.png";
+            img1 = "dell.jpg";
         } else if (content == "hp") {
             arr = hp;
-            img1 = "HP.png";
+            img1 = "hp.jpg";
         } else if (content == "lenovo") {
             arr = lenovo;
-            img1 = "Lenovo.png";
+            img1 = "lenovo.jpg";
         }
-        Scroll(arr, content);
+        Scroll(arr, img1);
 
         for (var i = 0; i < 10; i++) {
             // console.log(arr);
@@ -503,7 +554,7 @@ for (var i = 0; i < 5; i++) {
             buton.innerText = "Ətraflı";
             buton.setAttribute("tabindex", i)
             var img = document.createElement("img");
-            img.setAttribute("src", `images/${content}.jpg`);
+            img.setAttribute("src", `images/${img1}`);
             box.appendChild(img);
             box.appendChild(ad);
             box.appendChild(telefon);
@@ -521,11 +572,24 @@ for (var i = 0; i < 5; i++) {
             $('#exampleModalLong').addClass("modalStyle");
             $('#exampleModalLong').removeClass("d-none");
 
-            // console.log(tabindex);
+            console.log(arr);
             var j = document.querySelector("#img");
             j.setAttribute("src", `images/${content}.jpg`);
             // setValue($(".Ad"),arr[tabindex].ad);
-            $(".Ad").val(arr[tabindex].ad);
+            $(".Ad").text(arr[tabindex].ad);
+            $(".Tesvir").text(arr[tabindex].tesvir);
+            $(".Qiymet").text(arr[tabindex].qiymet);
+            $(".Telefon").text(arr[tabindex].telefon);
+            $(".Yeni").text(arr[tabindex].yeni);
+            $(".Emeli").text(arr[tabindex].əməliyaddaş);
+            $(".CPU").text(arr[tabindex].CPU);
+            $(".Daimi").text(arr[tabindex].daimiyaddaş);
+            $(".daimitipi").text(arr[tabindex].daimitipi);
+            $(".Emeliyyat").text(arr[tabindex].emeliyyat);
+            $(".GPU").text(arr[tabindex].GPU);
+            
+
+
         });
         $("#exit").click(function () {
             $('#exampleModalLong').removeClass("show");
@@ -536,29 +600,28 @@ for (var i = 0; i < 5; i++) {
     })
 
 }
-
+Scroll(acer, "acer.jpg");
 $('.button').click(function () {
-    if(arr==undefined){
-        $('#exampleModalLong').addClass("show");
+    var tabindex = this.getAttribute("tabindex");
+    $('#exampleModalLong').addClass("show");
     $('#exampleModalLong').addClass("modalStyle");
     $('#exampleModalLong').removeClass("d-none");
-    var tabindex = this.getAttribute("tabindex");
     var j = document.querySelector("#img");
     j.setAttribute("src", `images/acer.jpg`);
-    setValue($(".Ad"), arr[tabindex].ad);
-    }else{$('#exampleModalLong').addClass("show");
-    $('#exampleModalLong').addClass("modalStyle");
-    $('#exampleModalLong').removeClass("d-none");
-    var tabindex = this.getAttribute("tabindex");
-    // console.log(tabindex);
-    var j = document.querySelector("#img");
-    j.setAttribute("src", `images/${content}.jpg`);
-    setValue($(".Ad"), arr[tabindex].ad);
-    document.appendChild($(".Ad").val());
-}
+    $(".Ad").text(acer[tabindex].ad);
+    $(".Tesvir").text(arr[tabindex].tesvir);
+    $(".Qiymet").text(arr[tabindex].qiymet);
+    $(".Telefon").text(arr[tabindex].telefon);
+    $(".Yeni").text(arr[tabindex].yeni);
+    $(".Emeli").text(arr[tabindex].əməliyaddaş);
+    $(".CPU").text(arr[tabindex].CPU);
+    $(".Daimi").text(arr[tabindex].daimiyaddaş);
+    $(".daimitipi").text(arr[tabindex].daimitipi);
+    $(".Emeliyyat").text(arr[tabindex].emeliyyat);
+    $(".GPU").text(arr[tabindex].GPU);
 });
 $("#exit").click(function () {
-    
+
     $('#exampleModalLong').removeClass("show");
     $('#exampleModalLong').removeClass("modalStyle");
     $('#exampleModalLong').addClass("d-none");
@@ -566,4 +629,23 @@ $("#exit").click(function () {
 function setValue(clas, local) {
     clas = local;
 }
+// for(let i = 0;i<arrJSON.length;i++){
+//     let txt;
+//     let category = arrJSON[i].category.toLowerCase();
+//     if(category=="acer"){
+//     txt = "acer";
+//     }else if(category=="asus"){
+//         txt = "asus";
+//     }else if(category=="dell"){
+//         txt = "dell";
+//     }else if(category=="hp"){
+//         txt = "hp";
+//     }else if(category=="lenovo"){
+//         txt = "lenovo";
+//     }
+    
+
+
+
+// }
 

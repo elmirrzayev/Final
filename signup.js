@@ -1,11 +1,17 @@
 $(document).ready(function () {
     //bu deyisen user{k}-name-də və başqalarında bu rolu oynayacaq
-    var k = 1;
+    var k = false;
     //bu deyisenler hamisinin birlikde dogru olub olmamaginda bize yardim edecek
     var passwordcheck = false;
     var namecheck = false;
     // var phonecheck = false;
     var usernamecheck = false;
+    var arrProperties;
+    if(localStorage.getItem(`user`)){
+    arrProperties = JSON.parse(localStorage.getItem(`user`));    
+    }else
+    arrProperties = [];
+    
     $("#name").blur(function () {
         var name = $("#name").val();
         if (name == "") {
@@ -65,32 +71,33 @@ $(document).ready(function () {
         }
     });
     $("#create").submit(function (e) {
-        e.preventDefault();
-        var g = true;
-        var name = $("#name").val();
-        var pass = $("#password1").val();
-        var phone = $("#phone").val();
-        var user = $("#username").val();
-        var local = Number(localStorage.getItem(`number`));
+        // e.preventDefault();
         if (passwordcheck && usernamecheck && namecheck) {
-            for (var i = 0; i <= local; i++) {
-                if (name == localStorage.getItem(`user${i}-fname`) && pass == localStorage.getItem(`user${i}-password`)
-                    && phone == localStorage.getItem(`user${i}-phone`) && user == localStorage.getItem(`user${i}-name`)) {
-                        alert("BELE ISTIFADECI ARTIQ VAR");
-                    g = false;
+            for(let i = 0;i<arrProperties.length;i++){
+                if($("#username").val()==arrProperties[i].name){
+                    alert("bele istifadeci var")
+                    k=true;
+                    break;
                 }
+                
             }
-                if(g){
-                k = Number(localStorage.getItem(`number`)) + 1;
-                localStorage.setItem(`user${k}-fname`, $("#name").val());
-                localStorage.setItem(`user${k}-phone`, $("#phone").val());
-                localStorage.setItem(`user${k}-name`, $("#username").val());
-                localStorage.setItem(`user${k}-password`, $("#password1").val());
-                localStorage.setItem(`number`, k);
+            if(!k){
+                // $(".xeberdarliq")
+                var lclproperties ={
+                    fname:$("#name").val(),
+                    phone:$("#phone").val(),
+                    name:$("#username").val(),
+                    password:$("#password1").val()
+                };
+                arrProperties.push(lclproperties)
+                localStorage.setItem(`user`,JSON.stringify(arrProperties));
+                alert("Qeydiyyat Ugurla Basa Catdi.Username və parolunuzu yadinizda saxlayin və Login duymesine basin!Narahat Olmayin melumatlariniz hec kim ile paylasilmayacaqdir!")
+                
+            }
                 }
             
-        } else {
+        else 
             alert("Bəzi Yanlışlar var")
-        }
+        
     })
 })

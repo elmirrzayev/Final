@@ -20,28 +20,28 @@ $(document).ready(function () {
             $("#password1").addClass("is-valid");
         }
     })
- 
+
     var g = false;
-    var h=false;
+    var h = false;
     $("#log-in").submit(function (e) {
-        e.preventDefault();
+        // e.preventDefault();
         var mail = $("#email").val();
         var pass = $("#password1").val();
-        var local = Number(localStorage.getItem(`number`));
-        for (var i = 0; i <= local; i++) {
-            if (mail == localStorage.getItem(`user${i}-name`)) {
-                if (pass == localStorage.getItem(`user${i}-password`)) {
-                    localStorage.setItem(`new`,localStorage.getItem(`user${i}-name`))
-                    g = true;
-                    window.location.assign("index.html");
-                }
+        const arrProperties = JSON.parse(localStorage.getItem(`user`));
+        for (let i = 0; i < arrProperties.length; i++) {
+            if (mail == arrProperties[i].name && pass == arrProperties[i].password) {
+                g = true;
+                break;
             }
 
-
         }
-      
-        if(!g){
-            alert("bele bir istifadeci yoxdur!!!")
+        if (g) {
+            localStorage.setItem(`new`,mail);
+            window.open("./index.html");
+            console.log("qosuldu");
+        } else {
+            alert("alert")
         }
     })
 })
+// var currentUser= JSON.stringify(lclproperties.name); localStorage.setItem(`current`,currentUser);
